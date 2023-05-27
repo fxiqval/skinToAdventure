@@ -53,8 +53,13 @@ function parseToTellraw(){
 
 }
 
-function trToJava(){
-
+function trToJava(tr){
+    let final = [];
+    tr.forEach(element => {
+        if (typeof element === 'string') return final.push('Component.text(\'\\n\')'   )
+        final.push(`Component.text("${element.text}").color(TextColor.color(0x${element.color.slice(1)}))`);
+    });
+    return final.map((x, i) => i !== 0 ? x + ')' : x).join('.append(');
 }
 function trToKotlin(tr){
     let final = [];

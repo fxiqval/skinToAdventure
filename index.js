@@ -1,6 +1,7 @@
 const { PNG } = require('pngjs');
 const prompt = require('prompt');
 const { fetch } = require('undici')
+const sPrompt = require('select-prompt')
 
 function componentToHex(component) {
     const final = component.toString(16);
@@ -12,15 +13,11 @@ const rgbToHex = (...args) => args.map(componentToHex).join('');
 prompt.start();
 let jOrK;
 
-prompt.get(['username', {
-    name: 'Java Or kotlin? (<java/kotlin>)',
-    enum: [
-        'java',
-        'kotlin'
-    ]
-}]).then(({ username, /* lmao, i forgot how to use js. pull request maybe? 😉 */ 'Java Or kotlin? (<java/kotlin>)': jOrC }) => {
-jOrK = jOrC
+sPrompt('java or kotlin?', [{title: 'Java', value: 'j'}, {title: 'Kotlin', value:'k'}]).on('submit', (d) => {
+    jOrK = d == 'j' ? 'java' : 'kotlin'
+prompt.get(['username']).then(({ username }) => {
 fetchUsername(username)
+})
 })
 
 const png = new PNG();

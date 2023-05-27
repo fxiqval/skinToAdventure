@@ -13,6 +13,7 @@
     "axios": "^1.4.0",
     "pngjs": "^7.0.0",
     "prompt": "^1.3.0",
+    "select-prompt": "^0.3.2",
     "undici": "^5.22.1"
   }
 }
